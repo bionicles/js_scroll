@@ -12,7 +12,7 @@
 		}
 
 		#magic{
-			color: #777;
+			color: orange;
 			border-right: 1px solid #777;
 			padding-right: 7px;
 			display: inline;
@@ -25,20 +25,28 @@
 
 	<script>
 
-		var words = ["fun", "exciting", "about not giving up", "being helpful", "being open", "what I learned at CodingDojo!"],
+		var words = ["magic!", "fun!", "exciting!", "about not giving up!", "helpful!", "open!", "what I learned at CodingDojo!"],
 			el = document.getElementById('magic'),
 			word_counter = 0,
 			character_counter = 0;
 
 		function updateText()
 		{
-			el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
+			// if this letter is a space, insert a non-breaking space
+			if (words[word_counter][character_counter] == " ") {
+				el.innerHTML = el.innerHTML + "&nbsp;";
+				character_counter ++;
+			}
+			// otherwise, just add the next letter in the current word
+			else {
+				el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
+			}
 
-			if(character_counter == words[word_counter].length)
+			if(character_counter > words[word_counter].length)
 			{
 				word_counter++; 	//choose a different word
 				character_counter = 0;	//start over with the first character of the word
-				el.innerHTML = '';  //set the html to be blank
+				el.innerHTML = "";  //set the html to be blank
 
 				//if we're displaying the last word, go back to the first word
 				if(word_counter == words.length)
@@ -46,7 +54,7 @@
 			}
 		}
 
-		setInterval(updateText,300);
+		setInterval(updateText,50);
 
 	</script>
 
